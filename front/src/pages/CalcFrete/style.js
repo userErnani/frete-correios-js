@@ -38,7 +38,9 @@ input {
             margin-left: 1.5vw;
             font-size: 1.8vw;
             color: red;
-            }
+         }
+
+
 
       .flex {
         display: flex;

@@ -2,6 +2,7 @@
 import api from '../../_config/configAPI'
 import React, { useEffect, useState } from "react";
 import { DivFrete } from './style'
+import InputMask from 'react-input-mask'
 
 
 export const CalcFrete = () => {
@@ -94,47 +95,53 @@ export const CalcFrete = () => {
                 <form>
 
                     <div>
-                        <label >Digite o CEP de Origem</label><br />
-                        <input mask='99999-999' type="string" name="CepOrigem" onBlur={buscaOrigem} autoFocus onChange={data} maxLength='9' />
+                        <label>Digite o CEP de Origem</label><br />
+                        <input mask='99999-999' type="string" name="CepOrigem"
+                               onBlur={buscaOrigem} autoFocus onChange={data}
+                               minLength='8'/>
 
-                        {!ceporigemresult ?
+                        {ceporigemresult.erro === true ?
+                            <div className="cep-data">Cep não encontrado </div> : 
+                        ceporigemresult ?
+                            <label className="cep-data">
+                                {ceporigemresult.logradouro + ' - '}
+                                {cepdestinoresult.localidade + ' - '}
+                                {ceporigemresult.uf}</label>
+                            : <></>}
+                        <br />
+
+                        <label>Digite o CEP de Destino</label><br />
+                        <input mask='99999-999' type="string" name="CepDestino"
+                                onBlur={buscaDestino} onChange={data}  required/>
+
+                        {cepdestinoresult.erro ?
                             <label className="cep-data">Cep não encontrado </label> :
-                            <>
-                                <label className="cep-data">{ceporigemresult.logradouro} -
-                                    {cepdestinoresult.localidade} -
-                                    {ceporigemresult.uf}</label>
-                            </>
-                        } <br />
 
-                        <label >Digite o CEP de Destino</label><br />
-                        <input mask='99999-999' type="string" name="CepDestino" onBlur={buscaDestino} onChange={data} />
-
-                        {!cepdestinoresult ?
-                            <label className="cep-data">Cep não encontrado </label> :
-                            <>
-
-                        <label className="cep-data">{cepdestinoresult.logradouro} -
-                            {cepdestinoresult.localidade} -
-                            {cepdestinoresult.uf}</label>
-                            </> } <br />
+                        cepdestinoresult ?
+                            <label className="cep-data">
+                                {cepdestinoresult.logradouro + ' - '}
+                                {cepdestinoresult.localidade + ' - '}
+                                {cepdestinoresult.uf}</label>
+                        : <></>}
+                        <br />
 
                     </div>
 
                     <div className='flex'>
                         <div>
                             <label>Escolha o tipo de serviço</label><br />
-                            <select name="Servico" onChange={data} >
-                                <option value='04014' >SEDEX</option>
-                                <option value='04790' >SEDEX 10</option>
-                                <option value='04510' >PAC</option>
+                            <select name="Servico" onChange={data}>
+                                <option value='04014'>SEDEX</option>
+                                <option value='04790'>SEDEX 10</option>
+                                <option value='04510'>PAC</option>
                             </select>
                         </div>
 
                         <div>
                             <label>Qual o formato do objeto</label> <br />
-                            <select name="Formato" onChange={data} >
-                                <option value='1' >CX / Pacote</option>
-                                <option value='3' >Envelope</option>
+                            <select name="Formato" onChange={data}>
+                                <option value='1'>CX / Pacote</option>
+                                <option value='3'>Envelope</option>
                             </select>
                         </div>
                     </div>
@@ -178,11 +185,8 @@ export const CalcFrete = () => {
                                 </div> :
                                 <div>Frete R$: {valorFrete.Valor} <br />
                                     Prazo entrega: {valorFrete.PrazoEntrega} dia
-                                </div>
-                            }
-                        </div>
-
-                    }
+                                </div>}
+                        </div>}
 
 
                 </div>
