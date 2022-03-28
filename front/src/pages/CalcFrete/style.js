@@ -13,7 +13,7 @@ input {
     height: 6vh;
     border-radius: 1vw;
     text-align: center;
-    ::placeholder{ font-size: 1.5vw}
+    ::placeholder{ font-size: 1.5vw; color: coolgray}
   }
 
   label{

@@ -52,7 +52,6 @@ export const CalculoFrete = () => {
             }
         }, [cepdestino, ceporigem]);
 
-
     const data = (e) => setDadosFrete(
         { ...dadosFrete, [e.target.name]: e.target.value });
 
@@ -95,10 +94,14 @@ export const CalculoFrete = () => {
                     <div>
                         <label >Digite o CEP de Origem</label><br />
                         <input onBlur={buscaOrigem} mask='99999-999' type="string" name="CepOrigem" autoFocus onChange={data} maxLength='9' />
-                        <label className="cep-data">{ceporigemresult.logradouro} - {ceporigemresult.uf}</label><br />
+                        <label className="cep-data">{ceporigemresult.logradouro} -
+                                                    {cepdestinoresult.localidade} - 
+                                                    {ceporigemresult.uf}</label><br />
                         <label >Digite o CEP de Destino</label><br />
                         <input onBlur={buscaDestino} mask='99999-999' type="string" name="CepDestino" onChange={data} />
-                        <label className="cep-data">{cepdestinoresult.logradouro} - {cepdestinoresult.uf}</label><br />
+                        <label className="cep-data">{cepdestinoresult.logradouro} - 
+                                                    {cepdestinoresult.localidade} - 
+                                                    {cepdestinoresult.uf}</label><br />
                     </div>
 
                     <div className='flex'>
@@ -123,17 +126,17 @@ export const CalculoFrete = () => {
                     <div className='flex2'>
                         <div className='Tamanho'>
                             <label>Digite o Comprimento</label> <br />
-                            <input type="number" name="Comprimento" onChange={data} placeholder='formato valido em cm' />
+                            <input type="number" name="Comprimento" onChange={data} placeholder='33' />
                         </div>
 
                         <div className='Tamanho'>
                             <label>Digite a Altura</label> <br />
-                            <input type="number" name="Altura" onChange={data} placeholder='formato valido em cm' />
+                            <input type="number" name="Altura" onChange={data} placeholder='20' />
                         </div>
 
                         <div className='Tamanho'>
                             <label>Digite a Largura</label> <br />
-                            <input type="number" name="Largura" onChange={data} placeholder='formato valido em cm' /><br />
+                            <input type="number" name="Largura" onChange={data} placeholder='33' /><br />
                         </div>
                     </div>
 
