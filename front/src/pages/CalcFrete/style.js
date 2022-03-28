@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const DivFrete = styled.div`
 width: 60%;
 margin: auto;
-font-size: 1.5em;
+font-size: 2.5vw;
 background: #0043ff42;
 border: solid 0.5vw brown;
 border-radius: 1vw;
@@ -13,6 +13,7 @@ input {
     height: 6vh;
     border-radius: 1vw;
     text-align: center;
+    font-size: 1.68vw;
     ::placeholder{ font-size: 1.5vw; color: coolgray}
   }
 
@@ -35,7 +36,7 @@ input {
 
           .cep-data{
             margin-left: 1.5vw;
-            font-size: 2.3vw;
+            font-size: 1.8vw;
             color: red;
             }
 

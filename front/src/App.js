@@ -5,8 +5,7 @@ import {
         Route
 } from "react-router-dom";
 
-// import { CalcFrete } from './pages/CalcFrete/calcfrete';
-import { BuscaCep } from './pages/CalcFrete';
+import { CalcFrete } from './pages/CalcFrete';
 
 
 function App() {
@@ -15,8 +14,7 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* <Route path='/frete' element={<CalcFrete />} /> */}
-        <Route path='/frete' element={<BuscaCep />} />
+        <Route path='/frete' element={<CalcFrete />} />
         <Route path='*' element={<h1>Página Inexiste</h1>} />
 
       </Routes>
