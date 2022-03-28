@@ -78,11 +78,20 @@ input {
           text-align: left;
           font-size: 2vw;
         }
-      button {
-        width: 17vw;
-        height: 12vh;
-        border-radius: 2vw;
-        font-size: 2vw;
+        button {
+          background-color: #fff;
+          color: #0d6efd;
+          width: 15vw;
+          padding: 0.5vw;
+          margin-top: 1.5vw;
+          border: 2px solid #0d6efd;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 1.5vw; 
+          :hover{
+              background-color: #0d6efd;
+              color: #fff;
+              }
       }
 }
 `
