@@ -5,7 +5,10 @@ import { DivFrete } from './style'
 
 export const CalcFrete = () => {
 
-    const [status, setStatus] = useState('')
+    const [status, setStatus] = useState({
+        type: '',
+        mensagem: ''
+    });
 
     const [ceporigem, setCepOrigem] = useState();
     const [ceporigemresult, setCepOrigemresult] = useState('');
@@ -27,7 +30,7 @@ export const CalcFrete = () => {
     });
 
     const buscaOrigem = async (e) => {
-        setCepOrigem(e.target.value.replace(/[^\d]+/g, ''))
+        setCepOrigem(e.target.value.replace(/[^\d]+/g, ''));
     }
 
     const buscaDestino = async (e) => {
@@ -36,20 +39,33 @@ export const CalcFrete = () => {
 
     useEffect(
         () => {
+            
             const options = { method: 'GET', mode: 'cors', cache: 'default' }
 
-            if (ceporigem) {
-                fetch(`https://viacep.com.br/ws/${ceporigem}/json/`,
-                    options)
-                    .then((resposta) => resposta.json())
-                    .then((dados) => setCepOrigemresult(dados))
-            }
-            if (cepdestino) {
+            var validador1 = String(ceporigem);
+
+            (ceporigem) ?
+                (validador1.length === 8) ?
+                    fetch(`https://viacep.com.br/ws/${ceporigem}/json/`,
+                        options)
+                        .then((resposta) => resposta.json())
+                        .then((dados) => setCepOrigemresult(dados))
+
+                    : alert('Preencha o CEP corretamente. Ex.: (xxxxx-xxx) ou (xxxxxxxx)')
+                : setCepOrigemresult('');
+
+            var validador2 = String(cepdestino);
+
+            (cepdestino) ?
+            (validador2.length === 8) ?
                 fetch(`https://viacep.com.br/ws/${cepdestino}/json/`,
                     options)
                     .then((resposta) => resposta.json())
                     .then((dados) => setCepDestinoresult(dados))
-            }
+
+                : alert('Preencha o CEP corretamente. Ex.: (xxxxx-xxx) ou (xxxxxxxx)')
+                : setCepDestinoresult('') ;
+            
         }, [cepdestino, ceporigem]);
 
     const data = (e) => setDadosFrete(
@@ -93,23 +109,23 @@ export const CalcFrete = () => {
                 <form>
 
                     <div>
-                        <div className='InputCep'>
+                        <div className='InputCep1'>
                             <label>Digite o CEP de Origem<br />
                                 <input type="string" name="CepOrigem"
                                     onBlur={buscaOrigem} autoFocus onChange={data}
-                                    minLength='8' /> </label>
+                                    /> </label>
 
                             {ceporigemresult.erro === true ?
                                 <div className="cep-data">Cep não encontrado </div> :
                                 ceporigemresult ?
                                     <label className="cep-data">
                                         {ceporigemresult.logradouro} <br />
-                                        {cepdestinoresult.localidade + ' - '}
+                                        {ceporigemresult.localidade + ' - '}
                                         {ceporigemresult.uf}</label>
                                     : <></>}
                             <br />
                         </div>
-                        <div className='InputCep'>
+                        <div className='InputCep2'>
                             <label>Digite o CEP de Destino<br />
                                 <input type="string" name="CepDestino"
                                     onBlur={buscaDestino} onChange={data} required /></label>
@@ -151,12 +167,12 @@ export const CalcFrete = () => {
                             <input type="number" name="Comprimento" onChange={data} placeholder='33' maxLength='2' />
                         </div>
 
-                        <div className='Tamanho'>
+                        <div>
                             <label>Digite a Altura</label> <br />
                             <input type="number" name="Altura" onChange={data} placeholder='20' maxLength='2' />
                         </div>
 
-                        <div className='Tamanho'>
+                        <div>
                             <label>Digite a Largura</label> <br />
                             <input type="number" name="Largura" onChange={data} placeholder='33' maxLength='2' /><br />
                         </div>

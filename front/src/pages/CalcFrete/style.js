@@ -10,10 +10,9 @@ border-radius: 1vw;
 
 input {
     width: 17vw;
-    height: 6vh;
     border-radius: 1vw;
     text-align: center;
-    font-size: 1.68vw;
+    font-size: 1.60vw;
     ::placeholder{ font-size: 1.5vw; color: coolgray}
   }
 
@@ -24,36 +23,44 @@ input {
 
   .Titulo{
   text-align: center;
-  padding: 1vw;
+  padding-top: 1vw;
   font-size: 4.0vw;
-  color: white;
+  color: #0d6efd;
   }
 
   .Container{
-      margin-left: 1.5vw;
+      margin-left: 1.6vw;
 
-        .InputCep{
-          width: 97%;
-          display: flex;
-          align-items: center;
-          margin-top: 1vw;
-          border: solid 1px brown;
+    .InputCep1 {
+      width: 97%;
+      display: flex;
+      background: #87CEEB;
+      padding-bottom: 1vh;
+    }
 
-        .cep-data{
-          margin-left: 4.0vw;
-          font-size: 1.8vw;
-          color: red;
-        }
+    .InputCep2 {
+      width: 97%;
+      margin-top: 1vh;
+      display: flex;
+      background: #87CEEB;
+      padding-bottom: 1vh;
+    }
+
+    .cep-data{
+      margin-left: 4.0vw;
+      font-size: 1.8vw;
+      color: #4F4F4F;
     }
 
       .flex {
+        width: 97%;
+        margin-top:1vw;
         display: flex;
-
-        label{ text-align: center }
+        background: #87CEEB;
+        padding-bottom: 1vh;
 
         select {
           width: 17vw;
-          height: 6vh;
           border-radius: 1vw;
           text-align: center;
           font-size: 1.3vw;
@@ -62,35 +69,33 @@ input {
       }
     
       .flex2{
-        margin-top: 1.0vh;
+        width: 97%;
+        margin-top:1vw;
         display: flex;
-        text-align: left;
-
-        .Tamanho {
-          margin: 0 4vw 0 0;
-          width: 15vw;
-          height: 13vh;
-        }
+        justify-content: space-between;
+        background: #87CEEB;
+        padding-bottom: 1vh;
       }
 
       .flex3 {
           margin-top: 1.5vw;
           display: flex;
           padding-bottom: 3vh;
+          align-items: center;
 
       .selectStyle2 {
           margin: 0 5vw 0 0;
           text-align: left;
           font-size: 2vw;
         }
+
         button {
           background-color: #fff;
           color: #0d6efd;
           width: 15vw;
           padding: 0.5vw;
-          margin-top: 1.5vw;
           border: 2px solid #0d6efd;
-          border-radius: 5px;
+          border-radius: 25px;
           cursor: pointer;
           font-size: 1.5vw; 
           :hover{
