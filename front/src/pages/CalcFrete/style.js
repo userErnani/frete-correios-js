@@ -30,21 +30,26 @@ input {
   }
 
   .Container{
-      margin-left: 3vw;
-      text-align: left;
+      margin-left: 1.5vw;
 
+        .InputCep{
+          width: 97%;
+          display: flex;
+          align-items: center;
+          margin-top: 1vw;
+          border: solid 1px brown;
 
-          .cep-data{
-            margin-left: 1.5vw;
-            font-size: 1.8vw;
-            color: red;
-         }
-
-
+        .cep-data{
+          margin-left: 4.0vw;
+          font-size: 1.8vw;
+          color: red;
+        }
+    }
 
       .flex {
         display: flex;
-        text-align: left;
+
+        label{ text-align: center }
 
         select {
           width: 17vw;
@@ -52,7 +57,7 @@ input {
           border-radius: 1vw;
           text-align: center;
           font-size: 1.3vw;
-          margin: 0 4vw 0 0;
+          margin: 0 2vw 0 0;
         }
       }
     

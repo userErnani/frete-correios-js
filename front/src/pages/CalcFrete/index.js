@@ -2,8 +2,6 @@
 import api from '../../_config/configAPI'
 import React, { useEffect, useState } from "react";
 import { DivFrete } from './style'
-import InputMask from 'react-input-mask'
-
 
 export const CalcFrete = () => {
 
@@ -95,46 +93,47 @@ export const CalcFrete = () => {
                 <form>
 
                     <div>
-                        <label>Digite o CEP de Origem</label><br />
-                        <input mask='99999-999' type="string" name="CepOrigem"
-                               onBlur={buscaOrigem} autoFocus onChange={data}
-                               minLength='8'/>
+                        <div className='InputCep'>
+                            <label>Digite o CEP de Origem<br />
+                                <input type="string" name="CepOrigem"
+                                    onBlur={buscaOrigem} autoFocus onChange={data}
+                                    minLength='8' /> </label>
 
-                        {ceporigemresult.erro === true ?
-                            <div className="cep-data">Cep não encontrado </div> : 
-                        ceporigemresult ?
-                            <label className="cep-data">
-                                {ceporigemresult.logradouro + ' - '}
-                                {cepdestinoresult.localidade + ' - '}
-                                {ceporigemresult.uf}</label>
-                            : <></>}
-                        <br />
+                            {ceporigemresult.erro === true ?
+                                <div className="cep-data">Cep não encontrado </div> :
+                                ceporigemresult ?
+                                    <label className="cep-data">
+                                        {ceporigemresult.logradouro} <br />
+                                        {cepdestinoresult.localidade + ' - '}
+                                        {ceporigemresult.uf}</label>
+                                    : <></>}
+                            <br />
+                        </div>
+                        <div className='InputCep'>
+                            <label>Digite o CEP de Destino<br />
+                                <input type="string" name="CepDestino"
+                                    onBlur={buscaDestino} onChange={data} required /></label>
 
-                        <label>Digite o CEP de Destino</label><br />
-                        <input mask='99999-999' type="string" name="CepDestino"
-                                onBlur={buscaDestino} onChange={data}  required/>
-
-                        {cepdestinoresult.erro ?
-                            <label className="cep-data">Cep não encontrado </label> :
-
-                        cepdestinoresult ?
-                            <label className="cep-data">
-                                {cepdestinoresult.logradouro + ' - '}
-                                {cepdestinoresult.localidade + ' - '}
-                                {cepdestinoresult.uf}</label>
-                        : <></>}
-                        <br />
-
+                            {cepdestinoresult.erro ?
+                                <div className="cep-data">Cep não encontrado </div> :
+                                cepdestinoresult ?
+                                    <div className="cep-data">
+                                        {cepdestinoresult.logradouro} <br />
+                                        {cepdestinoresult.localidade + ' - '}
+                                        {cepdestinoresult.uf}</div>
+                                    : <></>}
+                            <br />
+                        </div>
                     </div>
-
+                    
                     <div className='flex'>
                         <div>
-                            <label>Escolha o tipo de serviço</label><br />
+                            <label>Escolha o tipo de serviço<br />
                             <select name="Servico" onChange={data}>
                                 <option value='04014'>SEDEX</option>
                                 <option value='04790'>SEDEX 10</option>
                                 <option value='04510'>PAC</option>
-                            </select>
+                            </select></label>
                         </div>
 
                         <div>
