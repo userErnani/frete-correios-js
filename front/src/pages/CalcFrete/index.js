@@ -1,7 +1,7 @@
 
 import api from '../../_config/configAPI'
 import React, { useEffect, useState } from "react";
-import { DivFrete } from './style'
+import { DivFrete, Body } from './style'
 
 export const CalcFrete = () => {
 
@@ -19,8 +19,8 @@ export const CalcFrete = () => {
 
     const [dadosFrete, setDadosFrete] = useState({
         Servico: '04014',
-        CepOrigem: '02130040',
-        CepDestino: '02066030',
+        CepOrigem: '',
+        CepDestino: '',
         Peso: '1',
         Formato: '1',
         Comprimento: '33',
@@ -39,7 +39,7 @@ export const CalcFrete = () => {
 
     useEffect(
         () => {
-            
+
             const options = { method: 'GET', mode: 'cors', cache: 'default' }
 
             var validador1 = String(ceporigem);
@@ -50,23 +50,28 @@ export const CalcFrete = () => {
                         options)
                         .then((resposta) => resposta.json())
                         .then((dados) => setCepOrigemresult(dados))
-
                     : alert('Preencha o CEP corretamente. Ex.: (xxxxx-xxx) ou (xxxxxxxx)')
-                : setCepOrigemresult('');
-
+                : setStatus({
+                    type: 'Sucesso',
+                    mensagem: 'Preencha todos os campos'
+                });
             var validador2 = String(cepdestino);
 
             (cepdestino) ?
-            (validador2.length === 8) ?
-                fetch(`https://viacep.com.br/ws/${cepdestino}/json/`,
-                    options)
-                    .then((resposta) => resposta.json())
-                    .then((dados) => setCepDestinoresult(dados))
+                (validador2.length === 8) ?
+                    fetch(`https://viacep.com.br/ws/${cepdestino}/json/`,
+                        options)
+                        .then((resposta) => resposta.json())
+                        .then((dados) => setCepDestinoresult(dados))
 
-                : alert('Preencha o CEP corretamente. Ex.: (xxxxx-xxx) ou (xxxxxxxx)')
-                : setCepDestinoresult('') ;
-            
+                    : alert('Preencha o CEP corretamente. Ex.: (xxxxx-xxx) ou (xxxxxxxx)')
+                : setStatus({
+                    type: 'Sucesso',
+                    mensagem: 'Preencha todos os campos'
+                });
+
         }, [cepdestino, ceporigem]);
+
 
     const data = (e) => setDadosFrete(
         { ...dadosFrete, [e.target.name]: e.target.value });
@@ -93,7 +98,7 @@ export const CalcFrete = () => {
             .then((response) => { return response })
             .then((dados) => {
                 setValorFrete(dados.data[0])
-                setStatus({ type: 'success' })
+                setStatus({ type: 'Successo' })
             })
             .catch((erro) => {
                 console.log(erro.MsgErro)
@@ -101,112 +106,119 @@ export const CalcFrete = () => {
     };
 
     return (
-        <DivFrete>
-            <div className='Titulo'>Frete via Correios</div>
 
-            <div className='Container'>
+        <Body>
+            <DivFrete>
 
-                <form>
+                <div className='Titulo'>Frete via Correios</div>
 
-                    <div>
-                        <div className='InputCep1'>
-                            <label>Digite o CEP de Origem<br />
-                                <input type="string" name="CepOrigem"
-                                    onBlur={buscaOrigem} autoFocus onChange={data}
-                                    /> </label>
+                <div className='Container'>
 
-                            {ceporigemresult.erro === true ?
-                                <div className="cep-data">Cep não encontrado </div> :
-                                ceporigemresult ?
-                                    <label className="cep-data">
-                                        {ceporigemresult.logradouro} <br />
-                                        {ceporigemresult.localidade + ' - '}
-                                        {ceporigemresult.uf}</label>
-                                    : <></>}
-                            <br />
-                        </div>
-                        <div className='InputCep2'>
-                            <label>Digite o CEP de Destino<br />
-                                <input type="string" name="CepDestino"
-                                    onBlur={buscaDestino} onChange={data} required /></label>
-
-                            {cepdestinoresult.erro ?
-                                <div className="cep-data">Cep não encontrado </div> :
-                                cepdestinoresult ?
-                                    <div className="cep-data">
-                                        {cepdestinoresult.logradouro} <br />
-                                        {cepdestinoresult.localidade + ' - '}
-                                        {cepdestinoresult.uf}</div>
-                                    : <></>}
-                            <br />
-                        </div>
-                    </div>
-                    
-                    <div className='flex'>
-                        <div>
-                            <label>Escolha o tipo de serviço<br />
-                            <select name="Servico" onChange={data}>
-                                <option value='04014'>SEDEX</option>
-                                <option value='04790'>SEDEX 10</option>
-                                <option value='04510'>PAC</option>
-                            </select></label>
-                        </div>
+                    <form>
 
                         <div>
-                            <label>Qual o formato do objeto</label> <br />
-                            <select name="Formato" onChange={data}>
-                                <option value='1'>CX / Pacote</option>
-                                <option value='3'>Envelope</option>
-                            </select>
+                            <div className='InputCep'>
+                                <div className='Tamanho'>
+                                    <label className='cep'>Digite o CEP de Origem</label><br />
+                                    <input type="string" name="CepOrigem"
+                                        onBlur={buscaOrigem} autoFocus onChange={data} /> </div>
+
+                                {ceporigemresult.erro === true ?
+                                    <div className="cep-data">CEP não encontrado </div> :
+                                    ceporigemresult ?
+                                        <label className="cep-data">
+                                            {ceporigemresult.logradouro} <br />
+                                            {ceporigemresult.localidade + ' - '}
+                                            {ceporigemresult.uf}</label>
+                                        : <></>}
+                                <br />
+                            </div>
+                            <div className='InputCep'>
+                                <div className='Tamanho'>
+                                    <label>Digite o CEP de Destino</label><br />
+                                    <input type="string" name="CepDestino"
+                                        onBlur={buscaDestino} onChange={data} /></div>
+
+                                {cepdestinoresult.erro ?
+                                    <div className="cep-data">CEP não encontrado </div> :
+                                    cepdestinoresult ?
+                                        <div className="cep-data">
+                                            {cepdestinoresult.logradouro} <br />
+                                            {cepdestinoresult.localidade + ' - '}
+                                            {cepdestinoresult.uf}</div>
+                                        : <></>}
+                                <br />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className='flex2'>
-                        <div className='Tamanho'>
-                            <label>Digite o Comprimento</label> <br />
-                            <input type="number" name="Comprimento" onChange={data} placeholder='33' maxLength='2' />
+                        <div className='flex1'>
+                            <div>
+                                <label>Escolha o tipo de serviço<br />
+                                    <select name="Servico" onChange={data}>
+                                        <option value='04014'>SEDEX</option>
+                                        <option value='04790'>SEDEX 10</option>
+                                        <option value='04510'>PAC</option>
+                                    </select></label>
+                            </div>
+
+                            <div>
+                                <label>Qual o formato do objeto</label> <br />
+                                <select name="Formato" onChange={data}>
+                                    <option value='1'>CX / Pacote</option>
+                                    <option value='3'>Envelope</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div>
-                            <label>Digite a Altura</label> <br />
-                            <input type="number" name="Altura" onChange={data} placeholder='20' maxLength='2' />
+                        <div className='flex2'>
+                            <div className='Tamanho'>
+                                <label>Digite o Comprimento</label> <br />
+                                <input type="number" name="Comprimento" onChange={data} placeholder='33' maxLength='2' />
+                            </div>
+
+                            <div>
+                                <label>Digite a Altura</label> <br />
+                                <input type="number" name="Altura" onChange={data} placeholder='20' maxLength='2' />
+                            </div>
+
+                            <div>
+                                <label>Digite a Largura</label> <br />
+                                <input type="number" name="Largura" onChange={data} placeholder='33' maxLength='2' /><br />
+                            </div>
                         </div>
 
-                        <div>
-                            <label>Digite a Largura</label> <br />
-                            <input type="number" name="Largura" onChange={data} placeholder='33' maxLength='2' /><br />
-                        </div>
-                    </div>
+                    </form>
 
-                </form>
-
-                <div className='flex3'>
-                    <div className='selectStyle2'>
-                        <button onClick={EnviarDados} type="submit">Calcular</button>
-                    </div>
-
-                    {status.type === 'success' && valorFrete.Valor <= '0,00' ?
-
-                        <div> Região não permite esse tipo <br />
-                            de entrega pelos Correios.
-                        </div> :
-
-
+                    <div className='flex3'>
                         <div className='selectStyle2'>
-
-                            {valorFrete.PrazoEntrega > 1 ?
-                                <div>Frete R$: {valorFrete.Valor} <br />
-                                    Prazo entrega: {valorFrete.PrazoEntrega} dias
-                                </div> :
-                                <div>Frete R$: {valorFrete.Valor} <br />
-                                    Prazo entrega: {valorFrete.PrazoEntrega} dia
-                                </div>}
-                        </div>}
-
-
+                            <button onClick={EnviarDados} type="submit">Calcular</button>
+                        </div>
+                        {(ceporigemresult.erro || cepdestinoresult.erro || !ceporigem || !cepdestino)
+                            ?
+                            <div className='selectStyle2'>{status.mensagem}</div>
+                            :
+                            (valorFrete.Valor <= '0,00')
+                                ?
+                                <div className='Alerta'> Região não permite esse tipo <br /> de entrega pelos Correios. </div>
+                                :
+                                status.type = true
+                                    ?
+                                    <div className='selectStyle2'>                                     {
+                                        (valorFrete.PrazoEntrega > 1) ?
+                                            <div>Frete R$: {valorFrete.Valor} <br />
+                                                Prazo entrega: {valorFrete.PrazoEntrega} dias
+                                            </div>
+                                            :
+                                            <div>Frete R$: {valorFrete.Valor} <br />
+                                                Prazo entrega: {valorFrete.PrazoEntrega} dia
+                                            </div>
+                                    }
+                                    </div>
+                                    : <div className='selectStyle2'> {status.mensagem} </div>
+                        }
+                    </div>
                 </div>
-            </div>
-
-        </DivFrete>
+            </DivFrete>
+        </Body>
     )
 }
