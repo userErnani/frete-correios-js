@@ -31,6 +31,7 @@ export const CalcFrete = () => {
 
     const buscaOrigem = async (e) => {
         setCepOrigem(e.target.value.replace(/[^\d]+/g, ''));
+        
     }
 
     const buscaDestino = async (e) => {
@@ -119,17 +120,17 @@ export const CalcFrete = () => {
                             <div className='InputCep'>
                                 <div>
                                     <label>Digite o CEP de Origem</label><br />
-                                    <input type="string" name="CepOrigem"
-                                        onBlur={buscaOrigem} autoFocus onChange={data} />
+                                        <input type="string" name="CepOrigem"
+                                             onBlur={buscaOrigem} autoFocus onChange={data} />
                                 </div>
 
                                 {ceporigemresult.erro === true ?
                                     <div className="cep-data">CEP não encontrado </div> :
                                     ceporigemresult ?
-                                        <div className="cep-data">
+                                        <span className="cep-data">
                                             {ceporigemresult.logradouro} <br />
                                             {ceporigemresult.localidade + ' - '}
-                                            {ceporigemresult.uf}</div>
+                                            {ceporigemresult.uf}</span>
                                         : <></>}
                                 <br />
                             </div>
@@ -143,10 +144,10 @@ export const CalcFrete = () => {
                                 {cepdestinoresult.erro ?
                                     <div className="cep-data">CEP não encontrado </div> :
                                     cepdestinoresult ?
-                                        <div className="cep-data">
+                                        <span className="cep-data">
                                             {cepdestinoresult.logradouro} <br />
                                             {cepdestinoresult.localidade + ' - '}
-                                            {cepdestinoresult.uf}</div>
+                                            {cepdestinoresult.uf}</span>
                                         : <></>}
                                 <br />
                             </div>

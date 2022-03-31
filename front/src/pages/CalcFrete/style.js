@@ -22,7 +22,6 @@ color: #4F4F4F;
   }
   background-size: none;
   height: auto;
-
 }
 `
 
@@ -34,8 +33,8 @@ left: 50%;
 transform: translate(-50%, -50%);
 
 width: 60vw;
-background: #0030ff30;
-border: solid 0.5vw brown;
+// background: #48D1CC;
+border: solid 0.5vw #808000;
 border-radius: 1vw;
 
   .Container{
@@ -53,7 +52,8 @@ border-radius: 1vw;
     border-radius: 1vw;
     text-align: center;
     font-size: 1.60vw;
-    ::placeholder{ font-size: 1.5vw; color: coolgray}
+    color: #708090;
+    ::placeholder{ font-size: 1.5vw; color: #708090}
   }
 
   .Titulo{
@@ -125,8 +125,6 @@ border-radius: 1vw;
   }
 }
 
-
-
 @media screen and (max-width: 750px) {
   position: absolute;
   top: 0%;
@@ -153,7 +151,6 @@ border-radius: 1vw;
   input {
     width: 55vw;
     border-radius: none;
-    // text-align: center;
     font-size:5vw;
     ::placeholder{ font-size: 5vw; color: coolgray}
   }
@@ -163,8 +160,6 @@ border-radius: 1vw;
     font-size: 10.0vw;
   }
 
-    // border: solid 1px red;
-
   .InputCep, .flex1, .flex2, .flex3 {
     width: 85vw;
     background: #87CEEB;
@@ -172,8 +167,6 @@ border-radius: 1vw;
     border: solid 1px blue;
     padding: 1vw;
     margin-top: 1vh;
-
-
   }
 
   .cep-data{
@@ -188,6 +181,7 @@ border-radius: 1vw;
 
   .flex3 {
     display: flex;
+    justify-content: center;
   }
   
   .selectStyle2 {
@@ -212,7 +206,6 @@ border-radius: 1vw;
     cursor: pointer;
     align-items: center;
     font-size: 4vw;
-
     :hover{
         background-color: #0d6efd;
         color: #fff;
