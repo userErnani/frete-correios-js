@@ -110,34 +110,35 @@ export const CalcFrete = () => {
         <Body>
             <DivFrete>
 
-                <div className='Titulo'>Frete via Correios</div>
-
                 <div className='Container'>
 
-                    <form>
+                    <div className='Titulo'>Frete via Correios </div>
 
-                        <div>
+                    <form>
+                        <div className='cep'>
                             <div className='InputCep'>
-                                <div className='Tamanho'>
-                                    <label className='cep'>Digite o CEP de Origem</label><br />
+                                <div>
+                                    <label>Digite o CEP de Origem</label><br />
                                     <input type="string" name="CepOrigem"
-                                        onBlur={buscaOrigem} autoFocus onChange={data} /> </div>
+                                        onBlur={buscaOrigem} autoFocus onChange={data} />
+                                </div>
 
                                 {ceporigemresult.erro === true ?
                                     <div className="cep-data">CEP não encontrado </div> :
                                     ceporigemresult ?
-                                        <label className="cep-data">
+                                        <div className="cep-data">
                                             {ceporigemresult.logradouro} <br />
                                             {ceporigemresult.localidade + ' - '}
-                                            {ceporigemresult.uf}</label>
+                                            {ceporigemresult.uf}</div>
                                         : <></>}
                                 <br />
                             </div>
                             <div className='InputCep'>
-                                <div className='Tamanho'>
+                                <div>
                                     <label>Digite o CEP de Destino</label><br />
                                     <input type="string" name="CepDestino"
-                                        onBlur={buscaDestino} onChange={data} /></div>
+                                        onBlur={buscaDestino} onChange={data} />
+                                </div>
 
                                 {cepdestinoresult.erro ?
                                     <div className="cep-data">CEP não encontrado </div> :
@@ -199,7 +200,7 @@ export const CalcFrete = () => {
                             :
                             (valorFrete.Valor <= '0,00')
                                 ?
-                                <div className='Alerta'> Região não permite esse tipo <br /> de entrega pelos Correios. </div>
+                                <div className='Alerta'> Região não permite essa modalidade de entrega. </div>
                                 :
                                 status.type = true
                                     ?
