@@ -1,8 +1,9 @@
+
 import styled from 'styled-components'
 import Fundo from './Fundo_Azul.png';
 
 
-export const Body = styled.body`
+export const Body = styled.section`
 margin: 0;
 padding: 0;
 width: 100vw;
@@ -14,6 +15,13 @@ background-image: url(${Fundo});
 background-repeat: no-repeat;
 background-size: cover;
 color: #4F4F4F;
+
+.informativo { 
+  font-size: 2vh;
+  color: #FF4500;
+  text-align: center
+}
+
 
 @media screen and (max-width: 750px) {
   *{
@@ -87,6 +95,7 @@ border-radius: 1vw;
   }
   
   .flex2{
+    input {width: 10vw}
     justify-content: space-between;
   }
 

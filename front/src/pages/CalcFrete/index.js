@@ -16,22 +16,20 @@ export const CalcFrete = () => {
     const [cepdestinoresult, setCepDestinoresult] = useState('');
     const [valorFrete, setValorFrete] = useState([]);
 
-
     const [dadosFrete, setDadosFrete] = useState({
-        Servico: '04014',
+        Servico: '',
         CepOrigem: '',
         CepDestino: '',
-        Peso: '1',
+        Peso: '',
         Formato: '1',
-        Comprimento: '33',
-        Altura: '21',
-        Largura: '33',
+        Comprimento: '',
+        Altura: '',
+        Largura: '',
         Diametro: '0'
     });
 
     const buscaOrigem = async (e) => {
         setCepOrigem(e.target.value.replace(/[^\d]+/g, ''));
-        
     }
 
     const buscaDestino = async (e) => {
@@ -70,7 +68,7 @@ export const CalcFrete = () => {
                     type: 'Sucesso',
                     mensagem: 'Preencha todos os campos'
                 });
-
+                
         }, [cepdestino, ceporigem]);
 
 
@@ -88,7 +86,7 @@ export const CalcFrete = () => {
         nVlLargura: parseFloat(dadosFrete.Largura),
         nVlDiametro: parseFloat(dadosFrete.Diametro)
     }
-
+    console.log(args);
     const EnviarDados = async e => {
         e.preventDefault();
         const headers = {
@@ -120,8 +118,8 @@ export const CalcFrete = () => {
                             <div className='InputCep'>
                                 <div>
                                     <label>Digite o CEP de Origem</label><br />
-                                        <input type="string" name="CepOrigem"
-                                             onBlur={buscaOrigem} autoFocus onChange={data} />
+                                    <input type="string" name="CepOrigem"
+                                        onBlur={buscaOrigem} autoFocus onChange={data} />
                                 </div>
 
                                 {ceporigemresult.erro === true ?
@@ -157,6 +155,7 @@ export const CalcFrete = () => {
                             <div>
                                 <label>Escolha o tipo de serviço<br />
                                     <select name="Servico" onChange={data}>
+                                        <option value=''></option>
                                         <option value='04014'>SEDEX</option>
                                         <option value='04790'>SEDEX 10</option>
                                         <option value='04510'>PAC</option>
@@ -166,6 +165,7 @@ export const CalcFrete = () => {
                             <div>
                                 <label>Qual o formato do objeto</label> <br />
                                 <select name="Formato" onChange={data}>
+                                    <option value=''></option>
                                     <option value='1'>CX / Pacote</option>
                                     <option value='3'>Envelope</option>
                                 </select>
@@ -173,20 +173,27 @@ export const CalcFrete = () => {
                         </div>
 
                         <div className='flex2'>
-                            <div className='Tamanho'>
-                                <label>Digite o Comprimento</label> <br />
-                                <input type="number" name="Comprimento" onChange={data} placeholder='33' maxLength='2' />
-                            </div>
 
                             <div>
                                 <label>Digite a Altura</label> <br />
-                                <input type="number" name="Altura" onChange={data} placeholder='20' maxLength='2' />
+                                <input type="number" name="Altura" onChange={data} placeholder='Altura' maxLength='2' />
                             </div>
 
                             <div>
                                 <label>Digite a Largura</label> <br />
-                                <input type="number" name="Largura" onChange={data} placeholder='33' maxLength='2' /><br />
+                                <input type="number" name="Largura" onChange={data} placeholder='Largura' maxLength='2' /><br />
                             </div>
+
+                            <div>
+                                <label>Digite o Comprimento</label> <br />
+                                <input type="number" name="Comprimento" onChange={data} placeholder='Comprimento' maxLength='2' />
+                            </div>
+
+                            <div>
+                                <label>Peso do Produto</label> <br />
+                                <input type="number" name="Peso" onChange={data} placeholder='Peso' maxLength='2' />
+                            </div>
+
                         </div>
 
                     </form>
@@ -208,17 +215,19 @@ export const CalcFrete = () => {
                                     <div className='selectStyle2'>                                     {
                                         (valorFrete.PrazoEntrega > 1) ?
                                             <div>Frete R$: {valorFrete.Valor} <br />
-                                                Prazo entrega: {valorFrete.PrazoEntrega} dias
+                                                Prazo entrega: {valorFrete.PrazoEntrega} dias.
                                             </div>
                                             :
                                             <div>Frete R$: {valorFrete.Valor} <br />
-                                                Prazo entrega: {valorFrete.PrazoEntrega} dia
+                                                Prazo entrega: {valorFrete.PrazoEntrega} dia.
                                             </div>
                                     }
                                     </div>
                                     : <div className='selectStyle2'> {status.mensagem} </div>
                         }
                     </div>
+                    <div className='informativo'>* O preço desta pesquisa é meramente informativo, devendo ser confirmado no ato da postagem.</div>
+
                 </div>
             </DivFrete>
         </Body>
