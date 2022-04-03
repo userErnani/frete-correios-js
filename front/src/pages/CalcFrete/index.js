@@ -36,6 +36,33 @@ export const CalcFrete = () => {
         setCepDestino(e.target.value.replace(/[^\d]+/g, ''))
     }
 
+    const data = (e) => setDadosFrete(
+        { ...dadosFrete, [e.target.name]: e.target.value });
+
+    const args = {
+        nCdServico: String(dadosFrete.Servico),
+        sCepOrigem: String(dadosFrete.CepOrigem),
+        sCepDestino: String(dadosFrete.CepDestino),
+        nVlPeso: parseInt(dadosFrete.Peso),
+        nCdFormato: parseInt(dadosFrete.Formato),
+        nVlComprimento: parseFloat(dadosFrete.Comprimento),
+        nVlAltura: parseFloat(dadosFrete.Altura),
+        nVlLargura: parseFloat(dadosFrete.Largura),
+        nVlDiametro: parseFloat(dadosFrete.Diametro)
+    }
+ 
+    function Validador() {
+        (dadosFrete.Servico
+            && dadosFrete.CepOrigem
+                &&  dadosFrete.CepDestino
+                    &&  dadosFrete.Peso
+                        &&  dadosFrete.Comprimento
+                            &&  dadosFrete.Altura
+                                &&  dadosFrete.Largura ) === "" 
+                                ? alert('Preencha todos os campos') 
+                                : <></>;
+    }
+
     useEffect(
         () => {
 
@@ -68,26 +95,13 @@ export const CalcFrete = () => {
                     type: 'Sucesso',
                     mensagem: 'Preencha todos os campos'
                 });
-                
+
         }, [cepdestino, ceporigem]);
 
-
-    const data = (e) => setDadosFrete(
-        { ...dadosFrete, [e.target.name]: e.target.value });
-
-    const args = {
-        nCdServico: String(dadosFrete.Servico),
-        sCepOrigem: String(dadosFrete.CepOrigem),
-        sCepDestino: String(dadosFrete.CepDestino),
-        nVlPeso: parseInt(dadosFrete.Peso),
-        nCdFormato: parseInt(dadosFrete.Formato),
-        nVlComprimento: parseFloat(dadosFrete.Comprimento),
-        nVlAltura: parseFloat(dadosFrete.Altura),
-        nVlLargura: parseFloat(dadosFrete.Largura),
-        nVlDiametro: parseFloat(dadosFrete.Diametro)
-    }
-    console.log(args);
     const EnviarDados = async e => {
+
+        Validador();
+
         e.preventDefault();
         const headers = {
             'headers': { 'Content-Type': 'application/json' }
@@ -121,6 +135,9 @@ export const CalcFrete = () => {
                                     <input type="string" name="CepOrigem"
                                         onBlur={buscaOrigem} autoFocus onChange={data} />
                                 </div>
+                                <div>
+                                {status.type === 'Erro' ? status.mensagem  : <></>}
+                                </div>
 
                                 {ceporigemresult.erro === true ?
                                     <div className="cep-data">CEP não encontrado </div> :
@@ -132,6 +149,7 @@ export const CalcFrete = () => {
                                         : <></>}
                                 <br />
                             </div>
+
                             <div className='InputCep'>
                                 <div>
                                     <label>Digite o CEP de Destino</label><br />
@@ -226,7 +244,7 @@ export const CalcFrete = () => {
                                     : <div className='selectStyle2'> {status.mensagem} </div>
                         }
                     </div>
-                    <div className='informativo'>* O preço desta pesquisa é meramente informativo, devendo ser confirmado no ato da postagem.</div>
+                    <div className='informativo'>* O preço desta pesquisa é meramente informativo, <br /> devendo ser confirmado no ato da postagem.</div>
 
                 </div>
             </DivFrete>

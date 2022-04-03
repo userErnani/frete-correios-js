@@ -16,7 +16,7 @@ app.use( (req, res, next) =>{
     app.use(cors());
     next();
 });
-
+ 
 app.use('/', routes);
 
 app.listen( parseInt(porta), console.log(`PORTA ${porta}`));
