@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path='/frete' element={<CalcFrete />} />
+        <Route path='/' element={<CalcFrete />} />
         <Route path='*' element={<h1>Página Inexiste</h1>} />
 
       </Routes>

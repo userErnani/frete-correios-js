@@ -114,7 +114,7 @@ export const CalcFrete = () => {
                 setStatus({ type: 'Successo' })
             })
             .catch((erro) => {
-                console.log(erro.MsgErro)
+                console.log(erro)
             })
     };
 

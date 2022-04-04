@@ -1,7 +1,7 @@
 
 let Correios = require('node-correios');
 let correios = new Correios();
- 
+
 const calcFrete = async (req, res) => {
 
     const args = ({
@@ -15,29 +15,29 @@ const calcFrete = async (req, res) => {
         nVlLargura: req.body.nVlLargura,
         nVlDiametro: req.body.nVlDiametro
     })
-  
+
     await correios.calcPrecoPrazo(args)
-            .then((resultado) => {
-                res.send(resultado)
+        .then((resultado) => {
+            res.send(resultado)
         })
         .catch(error => {
-            console.log(error);
+            res.send(error);
         });
 
     await correios.consultaCEP({ cep: args.sCepOrigem })
         .then(origem => {
-            // console.log(origem);
+            res.send(origem)
         })
         .catch(error => {
-            // console.log('erro1 : ', error);
+            res.send(error);
         });
 
     await correios.consultaCEP({ cep: args.sCepDestino })
         .then(destino => {
-            // console.log(destino);
+            res.send(destino)
         })
         .catch(error => {
-            // console.log('erro2 : ', error);
+            res.send(error);
         });
 }
 

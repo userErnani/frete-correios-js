@@ -237,4 +237,5 @@ border-radius: 1vw;
       }
     }
   }
+}
 `
