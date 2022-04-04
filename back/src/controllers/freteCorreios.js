@@ -26,18 +26,14 @@ const calcFrete = async (req, res) => {
 
     await correios.consultaCEP({ cep: args.sCepOrigem })
         .then(origem => {
-            res.send(origem)
         })
         .catch(error => {
-            res.send(error);
         });
 
     await correios.consultaCEP({ cep: args.sCepDestino })
         .then(destino => {
-            res.send(destino)
         })
         .catch(error => {
-            res.send(error);
         });
 }
 

@@ -17,3 +17,6 @@
 # Rodar os servidores
     em ambos os terminais executar: npm start
 
+# Para consulta observe os seguintes parametros
+    Largura minimas para calcular o frete: Altura: 10 / Largura: 10 / Comprimento: 15
+
