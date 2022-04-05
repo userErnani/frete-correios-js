@@ -10,7 +10,7 @@
     cd back
     npm install
 
-# Abrir terminal 1
+# Abrir terminal 2
     cd front
     npm install
 
