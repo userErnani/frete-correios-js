@@ -103,11 +103,20 @@ export const CalcFrete = () => {
         Validador();
 
         e.preventDefault();
+
         const headers = {
             'headers': { 'Content-Type': 'application/json' }
         }
 
+        let fetchData = {
+            method: 'POST',
+            body: args,
+            headers
+          }
+
         await api.post("/calcfrete", args, headers)
+
+        //await api.post("/calcfrete", fetchData)
             .then((response) => { return response })
             .then((dados) => {
                 setValorFrete(dados.data[0])
