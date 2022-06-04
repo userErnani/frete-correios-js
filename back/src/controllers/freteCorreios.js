@@ -23,18 +23,6 @@ const calcFrete = async (req, res) => {
         .catch(error => {
             res.send(error);
         });
-
-    // await correios.consultaCEP({ cep: args.sCepOrigem })
-    //     .then(origem => {
-    //     })
-    //     .catch(error => {
-    //     });
-
-    // await correios.consultaCEP({ cep: args.sCepDestino })
-    //     .then(destino => {
-    //     })
-    //     .catch(error => {
-    //     });
 }
 
 module.exports = { calcFrete };
